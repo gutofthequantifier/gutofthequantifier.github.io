@@ -107,6 +107,7 @@
       <section id="outro"></section>
     </main>
 
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
     <script src="../stickyfill.min.js"></script>
@@ -137,11 +138,14 @@
 
       let path = d3.geoPath().projection(projection);
 
-      // load geoJson
-      d3.json("police_force_areas.geojson").then(function(geojson) {
+      // load topoJson
+      d3.json("police_force_areas.topojson").then(function(topoData) {
+        // Convert topoJson to geoJson
+        const geojsonData = topojson.feature(topoData, topoData.objects.Police_Force_Areas_UK);
+
         svg.append("g")
           .selectAll("path")
-          .data(geojson.features)
+          .data(geojsonData.features)
           .enter().append("path")
           .attr("class", "region")
           .attr("d", path)

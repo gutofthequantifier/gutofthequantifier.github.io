@@ -139,7 +139,7 @@
       let path = d3.geoPath().projection(projection);
 
       // load topoJson
-      d3.json("police_force_areas_2.topojson").then(function(topoData) {
+      d3.json("police_force_areas_3.topojson").then(function(topoData) {
         // Convert topoJson to geoJson
         const geojsonData = topojson.feature(topoData, topoData.objects.Police_Force_Areas_UK);
 

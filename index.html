@@ -22,16 +22,24 @@
         margin: 0 auto;
       }
 
+      #map {
+        width: 100%;
+        height: 100%;
+        min-height: 500px;
+        background-color: transparent;
+      }
+
       .sticky-thing {
         position: -webkit-sticky;
         position: sticky;
         left: 0;
         width: 100%;
         margin: 0;
-        background-color: #8a8a8a;
+        background-color: transparent;
         z-index: 0;
         top: 12.5vh;
         height: 75vh;
+        min-height: 500px;
         /* Center everything inside */
         display: flex;
         align-items: center;
@@ -42,7 +50,6 @@
         font-size: 8rem;
         font-weight: 900;
         color: #fff;
-        background-image: url('');
         background-size: cover;
         background-position: center center;
       }
@@ -121,21 +128,21 @@
       
       <section id="scrolly">
         <div class="sticky-thing">
-          <p>---d3 map---</p>
+          <div id="map"></div>
         </div>
         <article>
-          <div class="step">
+          <div class="step" data-step="1">
             <p>In 2016, South Wales Police and the Met first use live facial 
               recognition technology.</p>
           </div>
-          <div class="step">
+          <div class="step" data-step="2">
             <p>Since then, 262 deployments have been made and 4,691,820 faces have been scanned.</p>
           </div>
-          <div class="step">
+          <div class="step" data-step="3">
             <p>South Wales Police and the Met have been at the forefront of trialling 
               and deploying the technology. In 2024, the two forces have made 113 deployments.</p>
           </div>
-          <div class="step">
+          <div class="step" data-step="4">
             <p>To date, 6 forces have deployed LFR.</p>
           <div>
             <p>A further 4 forces have confirmed that they are considering using LFR 
@@ -158,6 +165,8 @@
     </main>
 
     <!-- <div class='debug'></div> -->
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
     <script src="https://unpkg.com/scrollama"></script>
     <script>
@@ -170,6 +179,36 @@
 
       // initialize the scrollama
       var scroller = scrollama();
+
+       // create D3 map using TopoJSON
+       let width = sticky.clientWidth;
+      let height = sticky.clientHeight;
+
+      let svg = d3.select("#map").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+      let projection = d3.geoMercator()
+        .center([0, 55])
+        .scale(4000)
+        .translate([width / 2, height / 2]);
+
+      let path = d3.geoPath().projection(projection);
+
+      // load TopoJSON data
+      d3.json("police_force_areas_2.topojson").then(function(topoData) {
+        let geojson = topojson.feature(topoData, topoData.objects.police_force_areas);
+
+        svg.append("g")
+          .selectAll("path")
+          .data(geojson.features)
+          .enter().append("path")
+          .attr("class", "region")
+          .attr("d", path)
+          .style("fill", "#ccc")
+          .style("stroke", "#333");
+      });
+
 
       // scrollama event handlers
       function handleStepEnter(response) {
@@ -185,7 +224,15 @@
         // sticky.querySelector("p").innerText = `Year: ${el.dataset.step}`;
         // sticky.style.backgroundColor = el.dataset.color;
         // sticky.querySelector("p").style.fontSize = `${el.dataset.step - 2015}rem`;
+
+         // update map color based on step
+        //  svg.selectAll(".region")
+        //   .style("fill", function(d) {
+        //     // Example: color regions differently based on the step number
+        //     return d.properties.force === response.index + 1 ? "orange" : "#ccc";
+        //   });
       }
+
 
       function init() {
         // 2. setup the scroller passing options
@@ -200,7 +247,20 @@
           .onStepEnter(handleStepEnter);
 
         // setup resize event
-        window.addEventListener("resize", scroller.resize);
+        window.addEventListener("resize", function() {
+          // resize the map
+          width = sticky.clientWidth;
+          height = sticky.clientHeight;
+
+          svg.attr("width", width).attr("height", height);
+
+          projection.translate([width / 2, height / 2]);
+
+          svg.selectAll("path").attr("d", path);
+
+          // update scrollama
+          scroller.resize();
+        });
       }
 
       // kick things off

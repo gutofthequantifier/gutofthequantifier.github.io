@@ -1,56 +1,64 @@
+<!-- Modified from: https://github.com/jsoma/simplified-scrollama-scrollytelling -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Scrollama: Sticky Side Example</title>
-    <meta name="description" content="Scrollama: Sticky Side Example" />
+    <title>Live Facial Recognition and the UK Police</title>
+    <meta name="description" content="Live Facial Recognition and the UK Police" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="style.css" />
     <style>
       #scrolly {
         position: relative;
-        display: flex;
         background-color: #f3f3f3;
         padding: 1rem;
       }
 
-      #scrolly > * {
-        flex: 1;
-      }
-
       article {
         position: relative;
-        padding: 0 1rem;
+        padding: 0;
         max-width: 20rem;
+        margin: 0 auto;
       }
 
-      figure {
+      .sticky-thing {
+        position: -webkit-sticky;
         position: sticky;
-        top: 0;
+        left: 0;
         width: 100%;
-        height: 100vh;
         margin: 0;
         background-color: #8a8a8a;
         z-index: 0;
+        top: 12.5vh;
+        height: 75vh;
+        /* Center everything inside */
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      #map {
-        width: 100%;
-        height: 100%;
+      .sticky-thing p {
+        font-size: 8rem;
+        font-weight: 900;
+        color: #fff;
+        background-image: url('');
+        background-size: cover;
+        background-position: center center;
       }
 
       .step {
         margin: 0 auto 2rem auto;
-        background-color: #3b3b3b;
+        margin-bottom: 15rem;
         color: #fff;
+        background-color: rgba(0, 0, 0, 0.1);
       }
 
       .step:last-child {
         margin-bottom: 0;
       }
 
-      .step.is-active {
+      .step.is-active p {
         background-color: goldenrod;
         color: #3b3b3b;
       }
@@ -59,6 +67,7 @@
         text-align: center;
         padding: 1rem;
         font-size: 1.5rem;
+        background-color: #3b3b3b00;
       }
     </style>
   </head>
@@ -66,143 +75,121 @@
   <body>
     <main>
       <nav>
-        <a href="https://github.com/russellgoldenberg/scrollama">scrollama.js</a>
-        <div class="nav__examples">
-          <p>Examples:</p>
-          <a href="https://russellgoldenberg.github.io/scrollama/basic">Basic</a>
-          <a href="https://russellgoldenberg.github.io/scrollama/progress">Progress</a>
-          <a href="https://russellgoldenberg.github.io/scrollama/sticky-side">Sticky Side</a>
-          <a href="https://russellgoldenberg.github.io/scrollama/sticky-overlay">Sticky Overlay</a>
-          <a href="https://russellgoldenberg.github.io/scrollama/mobile-pattern">Mobile Pattern</a>
+        <a href="https://github.com/russellgoldenberg/scrollama">Home</a>
+        <div class="nav">
         </div>
       </nav>
       <section id="intro">
-        <h1 class="intro__hed">Sticky Side Example</h1>
-        <p class="intro__dek">
+        <h1 class="intro__hed">Live Facial Recognition and the UK Police</h1>
+        <!-- <p class="intro__dek">
           Start scrolling to see how it works.
-        </p>
+        </p> -->
       </section>
-
+      <section id="intro">
+        <div class="textbox">
+          <p>In August 2020, the UK Court of Appeal ruled the use 
+            of live facial recognition technology (LFR) by South Wales
+             Police to be unlawful and in violation of the European
+              Convention on Human Rights. </p>
+          <br>
+          <p>Since that date, South Wales Police has deployed LFR on
+            48 occasions and scanned over 
+            2 million faces, a number equivalent to 70% of the 
+            Welsh population.</p>
+          <br>
+          <p>With the Prime Minister calling for the expansion of 
+            LFR in the wake of the recent far-right riots, police forces
+             are currently able to implement the technology in what 
+             civil liberties campaigners have described as a 
+             regulatory vacuum.</p>
+          <br>
+          <p>Questions around the efficacy and place for LFR in a democratic society remain.</p>
+          <br>
+          <p>What do we know about LFR so far? Why has its use increased despite being ruled unlawful?</p>
+          <br>
+          <h2>What is LFR? (game)</h2>
+          <br>  
+          <p>Link to game here.</p>
+        </div>
+        <br>
+        <div>
+          <h2>LFR in the UK</h2>
+          <br>
+          <p>The use of live facial recognition is already prevalent in the UK. Alongside use by the police, the technology has been increasingly, and controversially, used by a number of supermarket chains.</p>
+        </div>
+      </section>
+      
       <section id="scrolly">
+        <div class="sticky-thing">
+          <p>---d3 map---</p>
+        </div>
         <article>
-          <div class="step" data-step="1">
-            <p>STEP 1</p>
+          <div class="step">
+            <p>In 2016, South Wales Police and the Met first use live facial 
+              recognition technology.</p>
           </div>
-          <div class="step" data-step="2">
-            <p>STEP 2</p>
+          <div class="step">
+            <p>Since then, 262 deployments have been made and 4,691,820 faces have been scanned.</p>
           </div>
-          <div class="step" data-step="3">
-            <p>STEP 3</p>
+          <div class="step">
+            <p>South Wales Police and the Met have been at the forefront of trialling 
+              and deploying the technology. In 2024, the two forces have made 113 deployments.</p>
           </div>
-          <div class="step" data-step="4">
-            <p>STEP 4</p>
+          <div class="step">
+            <p>To date, 6 forces have deployed LFR.</p>
+          <div>
+            <p>A further 4 forces have confirmed that they are considering using LFR 
+              in the future.</p>
+          </div>
           </div>
         </article>
-
-        <figure>
-          <div id="map"></div>
-        </figure>
       </section>
-
-      <section id="outro"></section>
+      <section id="intro">
+        <div class="textbox">
+          <br>
+          <p>The police claim they have dealt with the issues
+             raised by the UK Court of 
+            Appeal and that the deployment of LFR is lawful.</p>
+          <br>
+          <p>However, in the absence of specific regulation there has
+             been a divergence between how forces use LFR. The interpretation of what is 'necessary, proportionate and fair' has been left to individual police chiefs.</p>
+        </div>
+      </section>
     </main>
 
-    <script src="https://d3js.org/topojson.v1.min.js"></script>
-    <script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+    <!-- <div class='debug'></div> -->
     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
-    <script src="../stickyfill.min.js"></script>
-    <script src="../scrollama.min.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
     <script>
-      // using d3 for convenience
-      var main = d3.select("main");
-      var scrolly = main.select("#scrolly");
-      var figure = scrolly.select("figure");
-      var article = scrolly.select("article");
-      var step = article.selectAll(".step");
+      // define page elements as variables
+      var main = document.querySelector("main");
+      var scrolly = main.querySelector("#scrolly");
+      var sticky = scrolly.querySelector(".sticky-thing");
+      var article = scrolly.querySelector("article");
+      var steps = article.querySelectorAll(".step");
 
       // initialize the scrollama
       var scroller = scrollama();
 
-      // create map
-      let width = figure.node().clientWidth;
-      let height = figure.node().clientHeight;
-
-      let svg = d3.select("#map").append("svg")
-        .attr("width", width)
-        .attr("height", height);
-
-      let projection = d3.geoMercator()
-        .center([0, 55])
-        .scale(4000)
-        .translate([width / 2, height / 2]);
-
-      let path = d3.geoPath().projection(projection);
-
-      // load topoJson
-      d3.json("police_force_areas_3.topojson").then(function(topoData) {
-        // Convert topoJson to geoJson
-        const geojsonData = topojson.feature(topoData, topoData.objects.Police_Force_Areas_UK);
-
-        svg.append("g")
-          .selectAll("path")
-          .data(geojsonData.features)
-          .enter().append("path")
-          .attr("class", "region")
-          .attr("d", path)
-          .style("fill", "#ccc")
-          .style("stroke", "#333");
-      });
-
-      // generic window resize listener event
-      function handleResize() {
-        // 1. update height of step elements
-        var stepH = Math.floor(window.innerHeight * 0.75);
-        step.style("height", stepH + "px");
-
-        width = figure.node().clientWidth;
-        height = figure.node().clientHeight;
-
-        svg.attr("width", width).attr("height", height);
-
-        projection.translate([width / 2, height / 2]);
-
-        svg.selectAll("path").attr("d", path);
-
-        // 3. tell scrollama to update new element dimensions
-        scroller.resize();
-      }
-
       // scrollama event handlers
       function handleStepEnter(response) {
-        console.log(response);
         // response = { element, direction, index }
+        var el = response.element;
 
-        // add color to current step only
-        step.classed("is-active", function(d, i) {
-          return i === response.index;
-        });
+        // remove is-active from all steps
+        // then add is-active to this step
+        steps.forEach(step => step.classList.remove('is-active'));
+        el.classList.add('is-active');
 
         // update graphic based on step
-        svg.selectAll(".region")
-          .style("fill", function(d) {
-            return d.properties.force === response.index + 1 ? "orange" : "#ccc";
-          });
-      }
-
-      function setupStickyfill() {
-        d3.selectAll(".sticky").each(function() {
-          Stickyfill.add(this);
-        });
+        // sticky.querySelector("p").innerText = `Year: ${el.dataset.step}`;
+        // sticky.style.backgroundColor = el.dataset.color;
+        // sticky.querySelector("p").style.fontSize = `${el.dataset.step - 2015}rem`;
       }
 
       function init() {
-        setupStickyfill();
-
-        // 1. force a resize on load to ensure proper dimensions are sent to scrollama
-        handleResize();
-
         // 2. setup the scroller passing options
-        // this will also initialize trigger observations
+        // 		this will also initialize trigger observations
         // 3. bind scrollama event handlers (this can be chained like below)
         scroller
           .setup({
@@ -213,7 +200,7 @@
           .onStepEnter(handleStepEnter);
 
         // setup resize event
-        window.addEventListener("resize", handleResize);
+        window.addEventListener("resize", scroller.resize);
       }
 
       // kick things off

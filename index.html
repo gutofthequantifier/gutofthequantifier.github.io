@@ -196,7 +196,7 @@
       let path = d3.geoPath().projection(projection);
 
       // load TopoJSON data
-      d3.json("police_force_areas_2.topojson").then(function(topoData) {
+      d3.json("police_force_areas_3.topojson").then(function(topoData) {
         let geojson = topojson.feature(topoData, topoData.objects.police_force_areas);
 
         svg.append("g")
